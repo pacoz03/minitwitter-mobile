@@ -60,4 +60,82 @@ export const authService = {
     }
 };
 
+export const postsService = {
+    getAll: async (limit = 20, offset = 0): Promise<import('../types/posts').PostsListResponse> => {
+        const response = await api.get('/posts', { params: { limit, offset } });
+        console.log('API getAll Posts Response:', JSON.stringify(response.data, null, 2));
+        return response.data;
+    },
+
+    create: async (content: string): Promise<import('../types/posts').Post> => {
+        const response = await api.post('/posts', { content });
+        console.log(response.data)
+        return response.data;
+    },
+
+    update: async (id: string, content: string): Promise<import('../types/posts').Post> => {
+        const response = await api.patch(`/posts/${id}`, { content });
+        return response.data;
+    },
+
+    get: async (id: string): Promise<import('../types/posts').Post> => {
+        const response = await api.get(`/posts/${id}`);
+        return response.data;
+    },
+
+    delete: async (id: string) => {
+        await api.delete(`/posts/${id}`);
+    },
+
+    getLikesCount: async (postId: string): Promise<number> => {
+        const response = await api.get('/likes', { 
+            params: { post_id: postId, count: 'true' } 
+        });
+        // API docs say: if count=true, returns { count: number }
+        // But the schema example says "value": { "count": 42 }
+        return (response.data as any).count;
+    },
+
+    getIsLikedByUser: async (postId: string, userId: string): Promise<boolean> => {
+        const response = await api.get('/likes', {
+            params: { post_id: postId, user_id: userId }
+        });
+        // Returns list. If items.length > 0, it is liked.
+        return response.data.items && response.data.items.length > 0;
+    },
+
+    addLike: async (postId: string) => {
+        await api.post('/likes', { post_id: postId });
+    },
+
+    removeLike: async (postId: string) => {
+        // DELETE /likes uses a body. Axios delete second arg is config, so we need 'data' field.
+        await api.delete('/likes', { data: { post_id: postId } });
+    },
+
+    getCommentsCount: async (postId: string): Promise<number> => {
+        // To get count, we can fetch with limit=1 and read the 'count' field from metadata
+        const response = await api.get('/comments', {
+            params: { post_id: postId, limit: 1 }
+        });
+        return response.data.count;
+    }
+};
+
+export const commentsService = {
+    getAll: async (postId: string, limit = 20, offset = 0): Promise<import('../types/posts').CommentsListResponse> => {
+        const response = await api.get('/comments', { 
+            params: { post_id: postId, limit, offset } 
+        });
+        console.log('API getAll Comments Response:', JSON.stringify(response.data, null, 2));
+        return response.data;
+    },
+
+    create: async (postId: string, content: string): Promise<import('../types/posts').Comment> => {
+        const response = await api.post('/comments', { post_id: postId, content });
+        console.log(response.data)
+        return response.data;
+    }
+};
+
 export default api;

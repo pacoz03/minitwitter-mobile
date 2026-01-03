@@ -12,6 +12,7 @@ export default function RegisterScreen() {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
     const [loading, setLoading] = useState(false);
 
     const handleRegister = async () => {
@@ -83,13 +84,22 @@ export default function RegisterScreen() {
                     onChangeText={setPassword}
                     secureTextEntry
                 />
+
+                <TextInput
+                    style={styles.input}
+                    placeholder="Confirm Password"
+                    placeholderTextColor="#71767b"
+                    value={confirmPassword}
+                    onChangeText={setConfirmPassword}
+                    secureTextEntry
+                />
             </View>
 
             <View style={styles.footer}>
                 <TouchableOpacity 
-                    style={[styles.button, (!username || !email || !password) && styles.buttonDisabled]} 
+                    style={[styles.button, (!username || !email || !password || password !== confirmPassword) && styles.buttonDisabled]} 
                     onPress={handleRegister}
-                    disabled={loading || !username || !email || !password}
+                    disabled={loading || !username || !email || !password || password !== confirmPassword}
                 >
                     {loading ? (
                         <ActivityIndicator color="#fff" />

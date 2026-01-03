@@ -19,13 +19,28 @@ export default function TabLayout() {
         headerTintColor: '#ffffff',
       }}
     >
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: "Home",
-          tabBarIcon: ({ color }) => <Ionicons name="home" size={24} color={color} />,
-        }}
-      />
-    </Tabs>
-  );
-}
+            <Tabs.Screen
+              name="index"
+              options={{
+                title: "Home",
+                tabBarIcon: ({ color }) => <Ionicons name="home" size={24} color={color} />,
+              }}
+            />
+                  <Tabs.Screen
+                    name="create"
+                    options={{
+                      title: "Post",
+                      tabBarIcon: ({ color }) => <Ionicons name="add-circle" size={24} color={color} />,
+                    }}
+                  />
+                  <Tabs.Screen
+                    name="likes"
+                    options={{
+                      title: "Likes",
+                      tabBarIcon: ({ color }) => <Ionicons name="heart" size={24} color={color} />,
+                    }}
+                  />
+                </Tabs>
+              );
+            }
+            

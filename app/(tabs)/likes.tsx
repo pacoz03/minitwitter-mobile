@@ -1,42 +1,64 @@
 import React, { useState, useCallback } from 'react';
 import { View, FlatList, StyleSheet, ActivityIndicator, RefreshControl, Text } from 'react-native';
-import { useFocusEffect } from 'expo-router';
-import { postsService } from '../../services/api';
+import { useFocusEffect, useRouter } from 'expo-router';
+import api, { postsService } from '../../services/api'; // Correct import: api is default
 import { Post } from '../../types/posts';
 import PostItem from '../../components/PostItem';
+import { useAuth } from '../../context/AuthContext';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-export default function HomeScreen() {
-    // const { user } = useAuth();
-    const [posts, setPosts] = useState<Post[]>([]);
+export default function LikesScreen() {
+    const router = useRouter();
+    const { user } = useAuth();
+    const [likedPosts, setLikedPosts] = useState<Post[]>([]);
     const [loading, setLoading] = useState(true);
     const [refreshing, setRefreshing] = useState(false);
 
-    const fetchPosts = useCallback(async () => {
+    const fetchLikedPosts = useCallback(async () => {
+        if (!user) return;
         try {
-            const response = await postsService.getAll(50); // Fetch top 50 for now
-            setPosts(response.items);
+            console.log('Fetching likes for user:', user.id);
+            // 1. Get likes by current user
+            const likesResponse = await api.get('/likes', {
+                params: { user_id: user.id.toString() }
+            });
+            console.log('Likes response:', likesResponse.data);
+            const likes = likesResponse.data.items || [];
+
+            // 2. Fetch post details for each like
+            const postsPromises = likes.map(async (like: any) => {
+                try {
+                    const post = await postsService.get(like.post_id);
+                    return post;
+                } catch {
+                    return null; 
+                }
+            });
+
+            const fetchedPosts = await Promise.all(postsPromises);
+            setLikedPosts(fetchedPosts.filter((p): p is Post => p !== null));
+
         } catch (error) {
-            console.error(error);
+            console.error("Failed to fetch likes", error);
         } finally {
             setLoading(false);
             setRefreshing(false);
         }
-    }, []);
+    }, [user]);
 
     useFocusEffect(
         useCallback(() => {
-            fetchPosts();
-        }, [fetchPosts])
+            fetchLikedPosts();
+        }, [fetchLikedPosts])
     );
 
     const onRefresh = () => {
         setRefreshing(true);
-        fetchPosts();
+        fetchLikedPosts();
     };
 
     const handleDeletePost = (id: string) => {
-        setPosts(current => current.filter(p => p.id !== id));
+        setLikedPosts(current => current.filter(p => p.id !== id));
     };
 
     if (loading) {
@@ -48,9 +70,9 @@ export default function HomeScreen() {
     }
 
     return (
-        <SafeAreaView style={styles.container} edges={['top']}>
+        <SafeAreaView style={styles.container}>
             <FlatList
-                data={posts}
+                data={likedPosts}
                 keyExtractor={(item) => item.id}
                 renderItem={({ item }) => (
                     <PostItem post={item} onDelete={handleDeletePost} />
@@ -60,7 +82,7 @@ export default function HomeScreen() {
                 }
                 ListEmptyComponent={
                     <View style={styles.centerContainer}>
-                        <Text style={styles.emptyText}>No posts yet.</Text>
+                        <Text style={styles.emptyText}>You haven&apos;t liked any posts yet.</Text>
                     </View>
                 }
             />
@@ -74,6 +96,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#000000',
     },
     header: {
+        padding: 15,
         borderBottomWidth: 1,
         borderBottomColor: '#333333',
     },

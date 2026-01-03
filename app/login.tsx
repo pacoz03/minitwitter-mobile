@@ -22,9 +22,6 @@ export default function LoginScreen() {
         setLoading(true);
         try {
             const response = await authService.login({ username, password });
-
-            console.log('Login Response:', response);
-            console.log('Response: ', response);
             
                 if ('requires_otp' in response && response.requires_otp) {
                     const otpResponse = response as LoginOtpRequiredResponse;

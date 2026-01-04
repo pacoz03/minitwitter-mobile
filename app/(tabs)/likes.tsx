@@ -18,26 +18,8 @@ export default function LikesScreen() {
         if (!user) return;
         try {
             console.log('Fetching likes for user:', user.id);
-            // 1. Get likes by current user
-            const likesResponse = await api.get('/likes', {
-                params: { user_id: user.id.toString() }
-            });
-            console.log('Likes response:', likesResponse.data);
-            const likes = likesResponse.data.items || [];
-
-            // 2. Fetch post details for each like
-            const postsPromises = likes.map(async (like: any) => {
-                try {
-                    const post = await postsService.get(like.post_id);
-                    return post;
-                } catch {
-                    return null; 
-                }
-            });
-
-            const fetchedPosts = await Promise.all(postsPromises);
-            setLikedPosts(fetchedPosts.filter((p): p is Post => p !== null));
-
+            const posts = await postsService.getLikedPosts(user.id.toString());
+            setLikedPosts(posts);
         } catch (error) {
             console.error("Failed to fetch likes", error);
         } finally {
@@ -45,6 +27,7 @@ export default function LikesScreen() {
             setRefreshing(false);
         }
     }, [user]);
+
 
     useFocusEffect(
         useCallback(() => {

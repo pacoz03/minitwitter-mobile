@@ -4,9 +4,9 @@ import { Platform } from 'react-native';
 import { LoginResponse, OtpSetupResponse, RegisterResponse, User, VerifyOtpResponse } from '../types/auth';
 
 const BASE_URL = Platform.select({
-    android: 'http://192.168.178.91:4000/api',
-    ios: 'http://192.168.178.91:4000/api',
-    default: 'http://192.168.178.91:4000/api',
+    android: 'https://api.twitter.server.jetop.com/api',
+    ios: 'https://api.twitter.server.jetop.com/api',
+    default: 'https://api.twitter.server.jetop.com/api',
 });
 
 const api = axios.create({
@@ -63,13 +63,13 @@ export const authService = {
 export const postsService = {
     getAll: async (limit = 20, offset = 0): Promise<import('../types/posts').PostsListResponse> => {
         const response = await api.get('/posts', { params: { limit, offset } });
-        console.log('API getAll Posts Response:', JSON.stringify(response.data, null, 2));
+        //console.log('API getAll Posts Response:', JSON.stringify(response.data, null, 2));
         return response.data;
     },
 
     create: async (content: string): Promise<import('../types/posts').Post> => {
         const response = await api.post('/posts', { content });
-        console.log(response.data)
+        //console.log(response.data)
         return response.data;
     },
 
@@ -104,6 +104,32 @@ export const postsService = {
         return response.data.items && response.data.items.length > 0;
     },
 
+    getLikedPosts: async (userId: string): Promise<import('../types/posts').Post[]> => {
+        const likesResponse = await api.get('/likes', {
+            params: { user_id: userId }
+        });
+        const likes = likesResponse.data.items || [];
+
+        const postsPromises = likes.map(async (like: any) => {
+            try {
+                const response = await api.get(`/posts/${like.post_id}`);
+                return response.data;
+            } catch {
+                return null;
+            }
+        });
+
+        const fetchedPosts = await Promise.all(postsPromises);
+        return fetchedPosts.filter((p): p is import('../types/posts').Post => p !== null);
+    },
+
+    getByUser: async (userId: string, limit = 20, offset = 0): Promise<import('../types/posts').PostsListResponse> => {
+        const response = await api.get('/posts', { 
+            params: { user_id: userId, limit, offset } 
+        });
+        return response.data;
+    },
+
     addLike: async (postId: string) => {
         await api.post('/likes', { post_id: postId });
     },
@@ -131,9 +157,26 @@ export const commentsService = {
         return response.data;
     },
 
+    getUserComments: async (userId: string): Promise<import('../types/posts').Comment[]> => {
+        // API does not support filtering by user_id directly on /comments, 
+        // so we fetch a large number and filter client-side as per reference implementation.
+        const response = await api.get('/comments', { 
+            params: { limit: 1000 } 
+        });
+        const allComments = response.data.items || [];
+        return allComments.filter((c: import('../types/posts').Comment) => c.user_id === userId);
+    },
+
     create: async (postId: string, content: string): Promise<import('../types/posts').Comment> => {
         const response = await api.post('/comments', { post_id: postId, content });
         console.log(response.data)
+        return response.data;
+    }
+};
+
+export const usersService = {
+    update: async (userId: string, data: { bio?: string, username?: string, email?: string }): Promise<import('../types/auth').User> => {
+        const response = await api.patch(`/users/${userId}`, data);
         return response.data;
     }
 };

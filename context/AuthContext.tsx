@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import { User } from '../types/auth';
 import * as SecureStore from 'expo-secure-store';
 import { authService } from '../services/api';
@@ -20,7 +20,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const [user, setUser] = useState<User | null>(null);
     const [isLoading, setIsLoading] = useState(true);
 
-    const checkUser = async () => {
+    const checkUser = useCallback(async () => {
         try {
             const token = await SecureStore.getItemAsync('token');
             if (token) {
@@ -34,23 +34,23 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         } finally {
             setIsLoading(false);
         }
-    };
+    }, []);
 
     useEffect(() => {
         checkUser();
-    }, []);
+    }, [checkUser]);
 
-    const signIn = async (token: string, newUser: User) => {
+    const signIn = useCallback(async (token: string, newUser: User) => {
         await SecureStore.setItemAsync('token', token);
         setUser(newUser);
         router.replace('/(tabs)'); // Assuming we have a tabs layout for the main app
-    };
+    }, []);
 
-    const signOut = async () => {
+    const signOut = useCallback(async () => {
         await authService.logout();
         setUser(null);
         router.replace('/login');
-    };
+    }, []);
 
     return (
         <AuthContext.Provider value={{ user, isLoading, signIn, signOut, checkUser }}>

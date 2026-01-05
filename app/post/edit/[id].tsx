@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { View, TextInput, TouchableOpacity, Text, StyleSheet, Alert, ActivityIndicator, Keyboard } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { postsService } from '../../../services/api';
+import React, { useEffect, useState } from 'react';
+import { ActivityIndicator, Alert, Keyboard, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { postsService } from '../../../services/api';
 
 export default function EditPostScreen() {
     const { id } = useLocalSearchParams();
@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#1d9bf0',
         paddingVertical: 8,
         paddingHorizontal: 20,
-        borderRadius: 20,
+        borderRadius: 4,
         minWidth: 70,
         alignItems: 'center',
     },

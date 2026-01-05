@@ -131,7 +131,7 @@ export default function PostItem({ post, onDelete, commentCount: externalComment
 
             <View style={styles.actions}>
                 <TouchableOpacity style={styles.actionButton} onPress={handlePress}>
-                    <Ionicons name="chatbubble-outline" size={20} color="#71767b" />
+                    <Ionicons name="chatbubble" size={20} color="#1d9bf0" />
                     <Text style={styles.actionText}>{commentsCount}</Text>
                 </TouchableOpacity>
 
@@ -139,11 +139,11 @@ export default function PostItem({ post, onDelete, commentCount: externalComment
                     <Ionicons 
                         name={isLiked ? "heart" : "heart-outline"} 
                         size={20} 
-                        color={isLiked ? "#f91880" : "#71767b"} 
+                        color={isLiked ? "#f4212e" : "#71767b"} 
                     />
                     <Text style={[
                         styles.actionText, 
-                        isLiked && { color: "#f91880" }
+                        isLiked && { color: "#f4212e" }
                     ]}>
                         {likesCount}
                     </Text>

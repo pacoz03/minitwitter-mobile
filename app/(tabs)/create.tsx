@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { View, TextInput, TouchableOpacity, Text, StyleSheet, Alert, ActivityIndicator, Keyboard, KeyboardAvoidingView, Platform, TouchableWithoutFeedback } from 'react-native';
-import { useRouter } from 'expo-router';
-import { postsService } from '../../services/api';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
+import React, { useState } from 'react';
+import { ActivityIndicator, Alert, Keyboard, KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { postsService } from '../../services/api';
 
 export default function CreatePostScreen() {
     const router = useRouter();
@@ -100,6 +100,9 @@ export default function CreatePostScreen() {
                     maxLength={280}
                     onSelectionChange={(event) => setSelection(event.nativeEvent.selection)}
                 />
+                {/* Character count - excluding insertformat tags */}
+                
+                <Text style={{color: '#71767b', textAlign: 'right', marginBottom: 30}}>{content.replace(/\*\*|__|\*/g, '').length}/300</Text>
             </View>
 
             <KeyboardAvoidingView 
@@ -109,7 +112,6 @@ export default function CreatePostScreen() {
                 <View style={styles.toolbar}>
                     <TouchableOpacity onPress={() => insertFormat('**')} style={styles.toolButton}>
                         <Ionicons name="filter" size={24} color="#1d9bf0" /> 
-                         {/* Using filter as a placeholder for Bold icon or just Text */}
                          <Text style={{fontWeight: 'bold', color: '#1d9bf0', marginLeft: 5}}>B</Text>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => insertFormat('*')} style={styles.toolButton}>
@@ -136,17 +138,17 @@ const styles = StyleSheet.create({
         paddingHorizontal: 15,
         paddingVertical: 10,
         borderBottomWidth: 1,
-        borderBottomColor: '#333333',
     },
     cancelText: {
-        color: '#ffffff',
+        color: '#1d9bf0',
         fontSize: 16,
+        fontWeight: 'bold',
     },
     postButton: {
         backgroundColor: '#1d9bf0',
         paddingVertical: 8,
         paddingHorizontal: 20,
-        borderRadius: 20,
+        borderRadius: 4,
         minWidth: 70,
         alignItems: 'center',
     },

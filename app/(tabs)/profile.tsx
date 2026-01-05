@@ -199,10 +199,9 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     profileCard: {
-        backgroundColor: '#081020', // Dark blueish card background
         margin: 15,
         padding: 20,
-        borderRadius: 10,
+        borderRadius: 4,
     },
     cardTitle: {
         fontSize: 22,
@@ -245,12 +244,12 @@ const styles = StyleSheet.create({
         marginTop: 2,
     },
     editButton: {
-        backgroundColor: '#007aff',
+        backgroundColor: '#1d9bf0',
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
         paddingVertical: 12,
-        borderRadius: 20,
+        borderRadius: 4,
         marginTop: 10,
         marginBottom: 10,
     },
@@ -265,7 +264,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         paddingVertical: 12,
-        borderRadius: 20,
+        borderRadius: 4,
     },
     logoutButtonText: {
         color: '#ffffff',

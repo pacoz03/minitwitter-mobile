@@ -1,53 +1,25 @@
-import { Tabs } from "expo-router";
-import { Ionicons } from "@expo/vector-icons";
+import { Icon, Label, NativeTabs } from 'expo-router/unstable-native-tabs';
 
 export default function TabLayout() {
   return (
-    <Tabs 
-      screenOptions={{ 
-        tabBarActiveTintColor: "#1d9bf0",
-        tabBarInactiveTintColor: "#71767b",
-        tabBarStyle: {
-            backgroundColor: '#000000',
-            borderTopColor: '#333333',
-        },
-        headerStyle: {
-            backgroundColor: '#000000',
-            borderBottomColor: '#333333',
-            borderBottomWidth: 1,
-        },
-        headerTintColor: '#ffffff',
-      }}
-    >
-            <Tabs.Screen
-              name="index"
-              options={{
-                title: "Home",
-                tabBarIcon: ({ color }) => <Ionicons name="home" size={24} color={color} />,
-              }}
-            />
-            <Tabs.Screen
-              name="likes"
-              options={{
-                title: "Likes",
-                tabBarIcon: ({ color }) => <Ionicons name="heart" size={24} color={color} />,
-              }}
-            />
-            <Tabs.Screen
-              name="profile"
-              options={{
-                title: "Profile",
-                tabBarIcon: ({ color }) => <Ionicons name="person" size={24} color={color} />,
-              }}
-            />
-          <Tabs.Screen
-            name="create"
-            options={{
-              title: "Post",
-              tabBarIcon: ({ color }) => <Ionicons name="add-circle" size={24} color={color} />,
-            }}
-          />
-        </Tabs>
+    <NativeTabs>
+      <NativeTabs.Trigger name="index">
+        <Label>Home</Label>
+        <Icon sf="house.fill" drawable="custom_android_drawable" />
+      </NativeTabs.Trigger>
+
+      <NativeTabs.Trigger name="likes">
+        <Icon sf="heart.fill" drawable="custom_android_drawable" />
+        <Label>Likes</Label>
+      </NativeTabs.Trigger>
+      <NativeTabs.Trigger name="profile">
+        <Icon sf="person.fill" drawable="custom_android_drawable" />
+        <Label>Profile</Label>
+      </NativeTabs.Trigger>
+      <NativeTabs.Trigger name="create">
+        <Icon sf="pencil.circle" drawable="custom_android_drawable" />
+        <Label>Post</Label>
+      </NativeTabs.Trigger>
+    </NativeTabs>
   );
 }
-                  

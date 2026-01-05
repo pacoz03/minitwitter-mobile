@@ -1,14 +1,13 @@
 import React, { useState, useCallback } from 'react';
 import { View, FlatList, StyleSheet, ActivityIndicator, RefreshControl, Text } from 'react-native';
-import { useFocusEffect, useRouter } from 'expo-router';
-import api, { postsService } from '../../services/api'; // Correct import: api is default
+import { useFocusEffect } from 'expo-router';
+import  { postsService } from '../../services/api'; // Correct import: api is default
 import { Post } from '../../types/posts';
 import PostItem from '../../components/PostItem';
 import { useAuth } from '../../context/AuthContext';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function LikesScreen() {
-    const router = useRouter();
     const { user } = useAuth();
     const [likedPosts, setLikedPosts] = useState<Post[]>([]);
     const [loading, setLoading] = useState(true);
@@ -77,16 +76,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#000000',
-    },
-    header: {
-        padding: 15,
-        borderBottomWidth: 1,
-        borderBottomColor: '#333333',
-    },
-    headerTitle: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        color: '#ffffff',
     },
     centerContainer: {
         flex: 1,

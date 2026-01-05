@@ -49,10 +49,6 @@ export default function RegisterScreen() {
                 <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
                     <Text style={styles.backButtonText}>Cancel</Text>
                 </TouchableOpacity>
-                <View style={styles.logoPlaceholder}>
-                     <Text style={styles.logoText}>M</Text>
-                </View>
-                <View style={{width: 50}} /> 
             </View>
 
             <View style={styles.form}>
@@ -61,7 +57,7 @@ export default function RegisterScreen() {
                 <TextInput
                     style={styles.input}
                     placeholder="Name"
-                    placeholderTextColor="#71767b"
+                    placeholderTextColor="#82bde4ff"
                     value={username}
                     onChangeText={setUsername}
                 />
@@ -69,7 +65,7 @@ export default function RegisterScreen() {
                 <TextInput
                     style={styles.input}
                     placeholder="Email"
-                    placeholderTextColor="#71767b"
+                    placeholderTextColor="#82bde4ff"
                     value={email}
                     onChangeText={setEmail}
                     keyboardType="email-address"
@@ -79,7 +75,7 @@ export default function RegisterScreen() {
                 <TextInput
                     style={styles.input}
                     placeholder="Password"
-                    placeholderTextColor="#71767b"
+                    placeholderTextColor="#82bde4ff"
                     value={password}
                     onChangeText={setPassword}
                     secureTextEntry
@@ -88,7 +84,7 @@ export default function RegisterScreen() {
                 <TextInput
                     style={styles.input}
                     placeholder="Confirm Password"
-                    placeholderTextColor="#71767b"
+                    placeholderTextColor="#82bde4ff"
                     value={confirmPassword}
                     onChangeText={setConfirmPassword}
                     secureTextEntry
@@ -102,7 +98,7 @@ export default function RegisterScreen() {
                     disabled={loading || !username || !email || !password || password !== confirmPassword}
                 >
                     {loading ? (
-                        <ActivityIndicator color="#fff" />
+                        <ActivityIndicator color="#1d9bf0" />
                     ) : (
                         <Text style={styles.buttonText}>Sign up</Text>
                     )}
@@ -128,20 +124,9 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     backButtonText: {
-        color: '#ffffff',
-        fontSize: 16,
-    },
-    logoPlaceholder: {
-        width: 30,
-        height: 30,
-        borderRadius: 4,
-        backgroundColor: '#ffffff',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    logoText: {
-        color: '#000000',
+        color: '#1d9bf0',
         fontWeight: 'bold',
+        fontSize: 16,
     },
     form: {
         marginTop: 40,
@@ -155,18 +140,18 @@ const styles = StyleSheet.create({
     },
     input: {
         borderBottomWidth: 1,
-        borderBottomColor: '#333333',
+        borderBottomColor: '#82bde4ff',
         paddingVertical: 15,
         fontSize: 18,
         marginBottom: 20,
-        color: '#ffffff',
+        color: '#82bde4ff',
     },
     footer: {
         marginBottom: 20,
         justifyContent: 'flex-end',
     },
     button: {
-        backgroundColor: '#ffffff',
+        backgroundColor: '#1d9bf0',
         paddingVertical: 15,
         borderRadius: 4,
         alignItems: 'center',
@@ -175,7 +160,7 @@ const styles = StyleSheet.create({
         opacity: 0.5,
     },
     buttonText: {
-        color: '#000000',
+        color: '#fff',
         fontSize: 16,
         fontWeight: 'bold',
     },

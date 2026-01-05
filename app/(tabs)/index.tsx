@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { View, FlatList, StyleSheet, ActivityIndicator, RefreshControl, Text } from 'react-native';
+import { View, FlatList, StyleSheet, ActivityIndicator, RefreshControl, Text, Platform } from 'react-native';
 import { useFocusEffect } from 'expo-router';
 import { postsService } from '../../services/api';
 import { Post } from '../../types/posts';
@@ -48,7 +48,7 @@ export default function HomeScreen() {
     }
 
     return (
-        <SafeAreaView style={styles.container} edges={['top']}>
+        <SafeAreaView style={styles.container} >
             <FlatList
                 data={posts}
                 keyExtractor={(item) => item.id}
@@ -63,6 +63,7 @@ export default function HomeScreen() {
                         <Text style={styles.emptyText}>No posts yet.</Text>
                     </View>
                 }
+                contentInsetAdjustmentBehavior="automatic"
             />
         </SafeAreaView>
     );

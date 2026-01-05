@@ -1,9 +1,9 @@
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, ActivityIndicator } from 'react-native';
-import { useState } from 'react';
 import { useRouter } from 'expo-router';
-import { authService } from '../../services/api';
-import { useAuth } from '../../context/AuthContext';
+import { useState } from 'react';
+import { ActivityIndicator, Alert, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useAuth } from '../../context/AuthContext';
+import { authService } from '../../services/api';
 import { LoginOtpRequiredResponse, LoginSuccessResponse } from '../../types/auth';
 
 export default function LoginScreen() {
@@ -47,10 +47,6 @@ export default function LoginScreen() {
                 <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
                     <Text style={styles.backButtonText}>Cancel</Text>
                 </TouchableOpacity>
-                <View style={styles.logoPlaceholder}>
-                     <Text style={styles.logoText}>M</Text>
-                </View>
-                <View style={{width: 50}} /> 
             </View>
 
             <View style={styles.form}>
@@ -59,7 +55,7 @@ export default function LoginScreen() {
                 <TextInput
                     style={styles.input}
                     placeholder="Username"
-                    placeholderTextColor="#71767b"
+                    placeholderTextColor="#82bde4ff"
                     value={username}
                     onChangeText={setUsername}
                     autoCapitalize="none"
@@ -68,7 +64,7 @@ export default function LoginScreen() {
                 <TextInput
                     style={styles.input}
                     placeholder="Password"
-                    placeholderTextColor="#71767b"
+                    placeholderTextColor="#82bde4ff"
                     value={password}
                     onChangeText={setPassword}
                     secureTextEntry
@@ -82,7 +78,7 @@ export default function LoginScreen() {
                     disabled={loading || !username || !password}
                 >
                     {loading ? (
-                        <ActivityIndicator color="#fff" />
+                        <ActivityIndicator color="#1d9bf0" />
                     ) : (
                         <Text style={styles.buttonText}>Log in</Text>
                     )}
@@ -111,20 +107,9 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     backButtonText: {
-        color: '#ffffff',
-        fontSize: 16,
-    },
-    logoPlaceholder: {
-        width: 30,
-        height: 30,
-        borderRadius: 4,
-        backgroundColor: '#ffffff',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    logoText: {
-        color: '#000000',
+        color: '#1d9bf0',
         fontWeight: 'bold',
+        fontSize: 16,
     },
     form: {
         marginTop: 40,
@@ -138,18 +123,18 @@ const styles = StyleSheet.create({
     },
     input: {
         borderBottomWidth: 1,
-        borderBottomColor: '#333333',
+        borderBottomColor: '#82bde4ff',
         paddingVertical: 15,
         fontSize: 18,
         marginBottom: 20,
-        color: '#ffffff',
+        color: '#82bde4ff',
     },
     footer: {
         marginBottom: 20,
         justifyContent: 'flex-end',
     },
     button: {
-        backgroundColor: '#ffffff',
+        backgroundColor: '#1d9bf0',
         paddingVertical: 15,
         borderRadius: 4,
         alignItems: 'center',

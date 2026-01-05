@@ -89,7 +89,8 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     backButtonText: {
-        color: '#ffffff',
+        color: '#1d9bf0',
+        fontWeight: 'bold',
         fontSize: 16,
     },
     content: {
@@ -120,10 +121,10 @@ const styles = StyleSheet.create({
         letterSpacing: 5,
         textAlign: 'center',
         width: '80%',
-        color: '#ffffff',
+        color: '#1d9bf0',
     },
     button: {
-        backgroundColor: '#ffffff',
+        backgroundColor: '#1d9bf0',
         paddingVertical: 15,
         paddingHorizontal: 40,
         borderRadius: 4,
@@ -134,7 +135,7 @@ const styles = StyleSheet.create({
         opacity: 0.5,
     },
     buttonText: {
-        color: '#000000',
+        color: '#fff',
         fontSize: 16,
         fontWeight: 'bold',
     },

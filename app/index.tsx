@@ -1,7 +1,8 @@
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function LandingScreen() {
     const router = useRouter();
@@ -11,9 +12,8 @@ export default function LandingScreen() {
             <StatusBar style="light" />
             <View style={styles.content}>
                 <View style={styles.header}>
-                    {/* Placeholder for Logo */}
-                    <View style={styles.logoPlaceholder}>
-                        <Text style={styles.logoText}>M</Text>
+                    <View>
+                        <Ionicons name="logo-twitter" size={100} color="#1d9bf0" />
                     </View>
                     <Text style={styles.title}>MiniTwitter</Text>
                     <Text style={styles.subtitle}>See what&apos;s happening in the world right now.</Text>
@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#000000',
     },
+
     content: {
         flex: 1,
         justifyContent: 'space-between',
@@ -53,20 +54,6 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-    },
-    logoPlaceholder: {
-        width: 60,
-        height: 60,
-        borderRadius: 8, // Less rounded
-        backgroundColor: '#1d9bf0',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginBottom: 20,
-    },
-    logoText: {
-        color: '#fff',
-        fontSize: 30,
-        fontWeight: 'bold',
     },
     title: {
         fontSize: 32,
@@ -100,8 +87,7 @@ const styles = StyleSheet.create({
     },
     registerButton: {
         backgroundColor: '#000000',
-        borderWidth: 1,
-        borderColor: '#536471',
+
     },
     registerButtonText: {
         color: '#1d9bf0',

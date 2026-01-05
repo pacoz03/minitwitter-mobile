@@ -13,7 +13,7 @@ import { useAuth } from '../../context/AuthContext';
 export default function PostDetailScreen() {
     const { id } = useLocalSearchParams();
     const router = useRouter();
-    const { user } = useAuth(); // Get current user
+    const { user } = useAuth(); 
     const [post, setPost] = useState<Post | null>(null);
     const [comments, setComments] = useState<Comment[]>([]);
     const [loading, setLoading] = useState(true);
@@ -50,7 +50,7 @@ export default function PostDetailScreen() {
         try {
             const comment = await commentsService.create(postId, newComment);
             console.log(user);
-            // Enrich with current user data for immediate display
+
             const enrichedComment = {
                 ...comment,
                 user: user ? {
@@ -70,7 +70,6 @@ export default function PostDetailScreen() {
     };
 
     const handleDeletePost = () => {
-        // If post is deleted from here, go back
         router.back();
     };
 

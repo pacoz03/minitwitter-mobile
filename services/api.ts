@@ -55,8 +55,6 @@ export const authService = {
     
     logout: async () => {
         await SecureStore.deleteItemAsync('token');
-        // Optional: Call backend logout if needed, but JWT is usually stateless client-side removal
-        // await api.post('/auth/logout'); 
     }
 };
 
@@ -91,8 +89,6 @@ export const postsService = {
         const response = await api.get('/likes', { 
             params: { post_id: postId, count: 'true' } 
         });
-        // API docs say: if count=true, returns { count: number }
-        // But the schema example says "value": { "count": 42 }
         return (response.data as any).count;
     },
 
@@ -158,8 +154,6 @@ export const commentsService = {
     },
 
     getUserComments: async (userId: string): Promise<import('../types/posts').Comment[]> => {
-        // API does not support filtering by user_id directly on /comments, 
-        // so we fetch a large number and filter client-side as per reference implementation.
         const response = await api.get('/comments', { 
             params: { limit: 1000 } 
         });

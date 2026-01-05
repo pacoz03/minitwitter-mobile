@@ -2,13 +2,11 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, ActivityInd
 import { useState } from 'react';
 import { useRouter } from 'expo-router';
 import { authService } from '../../services/api';
-// import { useAuth } from '../../context/AuthContext';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import * as SecureStore from 'expo-secure-store';
 
 export default function RegisterScreen() {
     const router = useRouter();
-    // const { signIn } = useAuth(); 
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -27,7 +25,6 @@ export default function RegisterScreen() {
             
             await SecureStore.setItemAsync('token', response.token);
             
-            // Navigate to OTP Setup
             router.push({
                 pathname: '/setup-otp',
                 params: { 

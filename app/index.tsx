@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     },
     button: {
         paddingVertical: 15,
-        borderRadius: 4, // Less rounded
+        borderRadius: 4, 
         alignItems: 'center',
         justifyContent: 'center',
     },

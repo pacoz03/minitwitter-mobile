@@ -26,7 +26,7 @@ export default function EditProfileScreen() {
                 username: username,
                 bio: bio 
             });
-            await checkUser(); // Refresh user data in context
+            await checkUser(); 
             router.back();
         } catch (error: any) {
             console.error(error);

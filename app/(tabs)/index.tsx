@@ -7,14 +7,13 @@ import PostItem from '../../components/PostItem';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function HomeScreen() {
-    // const { user } = useAuth();
     const [posts, setPosts] = useState<Post[]>([]);
     const [loading, setLoading] = useState(true);
     const [refreshing, setRefreshing] = useState(false);
 
     const fetchPosts = useCallback(async () => {
         try {
-            const response = await postsService.getAll(50); // Fetch top 50 for now
+            const response = await postsService.getAll(50); 
             setPosts(response.items);
         } catch (error) {
             console.error(error);

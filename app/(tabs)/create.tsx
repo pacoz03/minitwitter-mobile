@@ -57,11 +57,8 @@ export default function CreatePostScreen() {
         
         let newText = '';
         if (start === end) {
-             // No selection, just insert tags at cursor
              newText = text.substring(0, start) + tag + tag + text.substring(end);
-             // Move cursor between tags? Ideally yes, but simplified for now
         } else {
-            // Wrap selection
             const selectedText = text.substring(start, end);
             newText = text.substring(0, start) + tag + selectedText + tag + text.substring(end);
         }

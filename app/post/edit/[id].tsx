@@ -117,7 +117,11 @@ const styles = StyleSheet.create({
         color: '#ffffff',
     },
     cancelText: {
-        color: '#ffffff',
+        color: '#1d9bf0',
+        fontSize: 16,
+        fontWeight: 'bold',
+    },
+    postButton: {
         fontSize: 16,
     },
     saveButton: {

@@ -18,8 +18,6 @@ export default function SetupOtpScreen() {
 
     const handleDone = async () => {
         await checkUser();
-        // Assuming user is already logged in if coming from register
-        // If coming from settings (future), we might need to handle differently
         router.replace('/(tabs)');
     };
 

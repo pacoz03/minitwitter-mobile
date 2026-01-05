@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { View, FlatList, StyleSheet, ActivityIndicator, RefreshControl, Text } from 'react-native';
 import { useFocusEffect } from 'expo-router';
-import  { postsService } from '../../services/api'; // Correct import: api is default
+import  { postsService } from '../../services/api'; 
 import { Post } from '../../types/posts';
 import PostItem from '../../components/PostItem';
 import { useAuth } from '../../context/AuthContext';

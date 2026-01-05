@@ -14,7 +14,6 @@ interface PostItemProps {
 }
 
 export default function PostItem({ post, onDelete, commentCount: externalCommentCount }: PostItemProps) {
-    //console.log('PostItem received post:', JSON.stringify(post, null, 2));
     const router = useRouter();
     const { user } = useAuth();
     const [likesCount, setLikesCount] = useState(0);
@@ -32,7 +31,7 @@ export default function PostItem({ post, onDelete, commentCount: externalComment
                 user ? postsService.getIsLikedByUser(post.id, user.id.toString()) : Promise.resolve(false)
             ]);
             setLikesCount(lCount);
-            // If external count is provided, prefer it, otherwise use fetched
+
             if (externalCommentCount === undefined) {
                 setCommentsCount(cCount);
             }
@@ -46,7 +45,6 @@ export default function PostItem({ post, onDelete, commentCount: externalComment
         fetchMetadata();
     }, [fetchMetadata]);
 
-    // Sync with external comment count if it changes
     useEffect(() => {
         if (externalCommentCount !== undefined) {
             setCommentsCount(externalCommentCount);
@@ -175,7 +173,7 @@ const styles = StyleSheet.create({
     avatarPlaceholder: {
         width: 40,
         height: 40,
-        borderRadius: 4, // Less rounded
+        borderRadius: 4, 
         backgroundColor: '#333333',
         justifyContent: 'center',
         alignItems: 'center',

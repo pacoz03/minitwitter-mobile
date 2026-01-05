@@ -26,7 +26,7 @@ export default function ProfileScreen() {
         if (!user) return;
         setLoading(true);
         try {
-            await checkUser(); // Refresh user info (e.g. bio)
+            await checkUser(); 
 
             const [userPostsRes, userComments, userLikes] = await Promise.all([
                 postsService.getByUser(user.id.toString()),
@@ -259,7 +259,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     logoutButton: {
-        backgroundColor: '#d32f2f', // Red
+        backgroundColor: '#d32f2f', 
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
@@ -283,7 +283,7 @@ const styles = StyleSheet.create({
     },
     activeTab: {
         borderBottomWidth: 3,
-        borderBottomColor: '#ffffff', // White underline as in typical dark mode tabs
+        borderBottomColor: '#ffffff',  
     },
     tabText: {
         fontSize: 16,

@@ -43,7 +43,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const signIn = useCallback(async (token: string, newUser: User) => {
         await SecureStore.setItemAsync('token', token);
         setUser(newUser);
-        router.replace('/(tabs)'); // Assuming we have a tabs layout for the main app
+        router.replace('/(tabs)');  
     }, []);
 
     const signOut = useCallback(async () => {

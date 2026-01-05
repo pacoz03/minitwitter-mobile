@@ -8,7 +8,6 @@ interface CommentItemProps {
 }
 
 export default function CommentItem({ comment }: CommentItemProps) {
-    //console.log('CommentItem received comment:', JSON.stringify(comment, null, 2));
     return (
         <View style={styles.container}>
             <View style={styles.header}>

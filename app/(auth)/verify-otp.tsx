@@ -1,8 +1,8 @@
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, ActivityIndicator } from 'react-native';
 import { useState } from 'react';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { authService } from '../services/api';
-import { useAuth } from '../context/AuthContext';
+import { authService } from '../../services/api';
+import { useAuth } from '../../context/AuthContext';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function VerifyOtpScreen() {

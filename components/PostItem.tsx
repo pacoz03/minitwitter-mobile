@@ -1,3 +1,4 @@
+import StyledText from './StyledText';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import React, { useCallback, useEffect, useState } from 'react';
@@ -126,7 +127,7 @@ export default function PostItem({ post, onDelete, commentCount: externalComment
                 )}
             </View>
 
-            <Text style={styles.content}>{post.content}</Text>
+            <StyledText content={post.content} style={styles.content} />
 
             <View style={styles.actions}>
                 <TouchableOpacity style={styles.actionButton} onPress={handlePress}>

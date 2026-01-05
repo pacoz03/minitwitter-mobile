@@ -277,10 +277,10 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderBottomColor: '#333333',
         paddingHorizontal: 15,
+        justifyContent: 'space-around',
     },
     tab: {
         paddingVertical: 15,
-        marginRight: 20,
     },
     activeTab: {
         borderBottomWidth: 3,

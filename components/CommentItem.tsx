@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Comment } from '../types/posts';
+import StyledText from './StyledText';
 
 interface CommentItemProps {
     comment: Comment;
@@ -19,7 +20,7 @@ export default function CommentItem({ comment }: CommentItemProps) {
                     <Text style={styles.date}>{new Date(comment.created_at).toLocaleDateString()}</Text>
                 </View>
             </View>
-            <Text style={styles.content}>{comment.content}</Text>
+            <StyledText content={comment.content} style={styles.content} />
         </View>
     );
 }

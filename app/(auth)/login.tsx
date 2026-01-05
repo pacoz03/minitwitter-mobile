@@ -1,10 +1,10 @@
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, ActivityIndicator } from 'react-native';
 import { useState } from 'react';
 import { useRouter } from 'expo-router';
-import { authService } from '../services/api';
-import { useAuth } from '../context/AuthContext';
+import { authService } from '../../services/api';
+import { useAuth } from '../../context/AuthContext';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { LoginOtpRequiredResponse, LoginSuccessResponse } from '../types/auth';
+import { LoginOtpRequiredResponse, LoginSuccessResponse } from '../../types/auth';
 
 export default function LoginScreen() {
     const router = useRouter();
